@@ -1,0 +1,333 @@
+# Dieses Script liest eine CSV-Datendatei in GNU R ein.
+# Beim Einlesen werden für alle Variablen Beschriftungen (comment) angelegt.
+# Die Beschriftungen für Werte wird ebenfalls als Attribute (attr) abgelegt.
+
+ds_file = "https://www.soscisurvey.de/gammler-hinten-links-Fragebogen/?act=i7FY9kSr26yoexe6DdsLSogr"
+
+ds = read.table(
+  file=ds_file, encoding="UTF-8", fileEncoding="UTF-8",
+  header = FALSE, sep = "\t", quote = "\"",
+  dec = ".", row.names = "CASE",
+  col.names = c(
+    "CASE","SERIAL","REF","QUESTNNR","MODE","STARTED","A102_01","A101","A103",
+    "B101_01","B101_02","B101_03","B101_04","B101_05","B101_06","B101_07","B101_08",
+    "B101_09","B101_10","B201_01","B201_02","B201_03","B201_04","B201_05","B201_06",
+    "B201_07","B201_08","B201_09","B201_10","B201_11","B201_12","B201_13","B201_14",
+    "B201_15","B201_16","B201_17","B201_18","B201_19","B201_20","B201_21","B201_22",
+    "B201_23","B201_24","B201_25","B201_26","TIME001","TIME002","TIME003",
+    "TIME_SUM","MAILSENT","LASTDATA","FINISHED","Q_VIEWER","LASTPAGE","MAXPAGE"
+  ),
+  as.is = TRUE,
+  colClasses = c(
+    CASE="numeric", SERIAL="character", REF="character", QUESTNNR="character",
+    MODE="factor", STARTED="POSIXct", A102_01="character", A101="numeric",
+    A103="numeric", B101_01="numeric", B101_02="numeric", B101_03="numeric",
+    B101_04="numeric", B101_05="numeric", B101_06="numeric", B101_07="numeric",
+    B101_08="numeric", B101_09="numeric", B101_10="numeric", B201_01="numeric",
+    B201_02="numeric", B201_03="numeric", B201_04="numeric", B201_05="numeric",
+    B201_06="numeric", B201_07="numeric", B201_08="numeric", B201_09="numeric",
+    B201_10="numeric", B201_11="numeric", B201_12="numeric", B201_13="numeric",
+    B201_14="numeric", B201_15="numeric", B201_16="numeric", B201_17="numeric",
+    B201_18="numeric", B201_19="numeric", B201_20="numeric", B201_21="numeric",
+    B201_22="numeric", B201_23="numeric", B201_24="numeric", B201_25="numeric",
+    B201_26="numeric", TIME001="integer", TIME002="integer", TIME003="integer",
+    TIME_SUM="integer", MAILSENT="POSIXct", LASTDATA="POSIXct",
+    FINISHED="logical", Q_VIEWER="logical", LASTPAGE="numeric",
+    MAXPAGE="numeric"
+  ),
+  skip = 1,
+  check.names = TRUE, fill = TRUE,
+  strip.white = FALSE, blank.lines.skip = TRUE,
+  comment.char = "",
+  na.strings = ""
+)
+
+rm(ds_file)
+
+attr(ds, "project") = "gammler-hinten-links-Fragebogen"
+attr(ds, "description") = "UX Fragebogen"
+attr(ds, "date") = "2023-01-31 18:10:16"
+attr(ds, "server") = "https://www.soscisurvey.de"
+
+# Variable und Value Labels
+ds$A101 = factor(ds$A101, levels=c("1","2","3","-9"), labels=c("Männlich","Weiblich","Divers","[NA] nicht beantwortet"), ordered=FALSE)
+ds$A103 = factor(ds$A103, levels=c("1","2","3","-9"), labels=c("Gelegenheitsfahrer","Ambitionierter Fahrer","Tourist","[NA] nicht beantwortet"), ordered=FALSE)
+attr(ds$B101_01,"1") = "trifft voll zu"
+attr(ds$B101_01,"5") = "trifft gar nicht zu"
+attr(ds$B101_02,"1") = "trifft voll zu"
+attr(ds$B101_02,"5") = "trifft gar nicht zu"
+attr(ds$B101_03,"1") = "trifft voll zu"
+attr(ds$B101_03,"5") = "trifft gar nicht zu"
+attr(ds$B101_04,"1") = "trifft voll zu"
+attr(ds$B101_04,"5") = "trifft gar nicht zu"
+attr(ds$B101_05,"1") = "trifft voll zu"
+attr(ds$B101_05,"5") = "trifft gar nicht zu"
+attr(ds$B101_06,"1") = "trifft voll zu"
+attr(ds$B101_06,"5") = "trifft gar nicht zu"
+attr(ds$B101_07,"1") = "trifft voll zu"
+attr(ds$B101_07,"5") = "trifft gar nicht zu"
+attr(ds$B101_08,"1") = "trifft voll zu"
+attr(ds$B101_08,"5") = "trifft gar nicht zu"
+attr(ds$B101_09,"1") = "trifft voll zu"
+attr(ds$B101_09,"5") = "trifft gar nicht zu"
+attr(ds$B101_10,"1") = "trifft voll zu"
+attr(ds$B101_10,"5") = "trifft gar nicht zu"
+attr(ds$B201_01,"1") = "unerfreulich [1]"
+attr(ds$B201_01,"7") = "erfreulich [7]"
+attr(ds$B201_01,"2") = "[2]"
+attr(ds$B201_01,"3") = "[3]"
+attr(ds$B201_01,"4") = "[4]"
+attr(ds$B201_01,"5") = "[5]"
+attr(ds$B201_01,"6") = "[6]"
+attr(ds$B201_02,"1") = "unverständlich [1]"
+attr(ds$B201_02,"7") = "verständlich [7]"
+attr(ds$B201_02,"2") = "[2]"
+attr(ds$B201_02,"3") = "[3]"
+attr(ds$B201_02,"4") = "[4]"
+attr(ds$B201_02,"5") = "[5]"
+attr(ds$B201_02,"6") = "[6]"
+attr(ds$B201_03,"1") = "kreativ [1]"
+attr(ds$B201_03,"7") = "phantasielos [7]"
+attr(ds$B201_03,"2") = "[2]"
+attr(ds$B201_03,"3") = "[3]"
+attr(ds$B201_03,"4") = "[4]"
+attr(ds$B201_03,"5") = "[5]"
+attr(ds$B201_03,"6") = "[6]"
+attr(ds$B201_04,"1") = "leicht zu lernen [1]"
+attr(ds$B201_04,"7") = "schwer zu lernen [7]"
+attr(ds$B201_04,"2") = "[2]"
+attr(ds$B201_04,"3") = "[3]"
+attr(ds$B201_04,"4") = "[4]"
+attr(ds$B201_04,"5") = "[5]"
+attr(ds$B201_04,"6") = "[6]"
+attr(ds$B201_05,"1") = "wertvoll [1]"
+attr(ds$B201_05,"7") = "minderfertig [7]"
+attr(ds$B201_05,"2") = "[2]"
+attr(ds$B201_05,"3") = "[3]"
+attr(ds$B201_05,"4") = "[4]"
+attr(ds$B201_05,"5") = "[5]"
+attr(ds$B201_05,"6") = "[6]"
+attr(ds$B201_06,"1") = "langweilig [1]"
+attr(ds$B201_06,"7") = "spannend [7]"
+attr(ds$B201_06,"2") = "[2]"
+attr(ds$B201_06,"3") = "[3]"
+attr(ds$B201_06,"4") = "[4]"
+attr(ds$B201_06,"5") = "[5]"
+attr(ds$B201_06,"6") = "[6]"
+attr(ds$B201_07,"1") = "uninteresssant [1]"
+attr(ds$B201_07,"7") = "interessant [7]"
+attr(ds$B201_07,"2") = "[2]"
+attr(ds$B201_07,"3") = "[3]"
+attr(ds$B201_07,"4") = "[4]"
+attr(ds$B201_07,"5") = "[5]"
+attr(ds$B201_07,"6") = "[6]"
+attr(ds$B201_08,"1") = "unberechenbar [1]"
+attr(ds$B201_08,"7") = "voraussagbar [7]"
+attr(ds$B201_08,"2") = "[2]"
+attr(ds$B201_08,"3") = "[3]"
+attr(ds$B201_08,"4") = "[4]"
+attr(ds$B201_08,"5") = "[5]"
+attr(ds$B201_08,"6") = "[6]"
+attr(ds$B201_09,"1") = "schnell [1]"
+attr(ds$B201_09,"7") = "langsam [7]"
+attr(ds$B201_09,"2") = "[2]"
+attr(ds$B201_09,"3") = "[3]"
+attr(ds$B201_09,"4") = "[4]"
+attr(ds$B201_09,"5") = "[5]"
+attr(ds$B201_09,"6") = "[6]"
+attr(ds$B201_10,"1") = "origniell [1]"
+attr(ds$B201_10,"7") = "konventionell [7]"
+attr(ds$B201_10,"2") = "[2]"
+attr(ds$B201_10,"3") = "[3]"
+attr(ds$B201_10,"4") = "[4]"
+attr(ds$B201_10,"5") = "[5]"
+attr(ds$B201_10,"6") = "[6]"
+attr(ds$B201_11,"1") = "behindernd [1]"
+attr(ds$B201_11,"7") = "unterstützend [7]"
+attr(ds$B201_11,"2") = "[2]"
+attr(ds$B201_11,"3") = "[3]"
+attr(ds$B201_11,"4") = "[4]"
+attr(ds$B201_11,"5") = "[5]"
+attr(ds$B201_11,"6") = "[6]"
+attr(ds$B201_12,"1") = "gut [1]"
+attr(ds$B201_12,"7") = "schlecht [7]"
+attr(ds$B201_12,"2") = "[2]"
+attr(ds$B201_12,"3") = "[3]"
+attr(ds$B201_12,"4") = "[4]"
+attr(ds$B201_12,"5") = "[5]"
+attr(ds$B201_12,"6") = "[6]"
+attr(ds$B201_13,"1") = "kompliziert [1]"
+attr(ds$B201_13,"7") = "einfach [7]"
+attr(ds$B201_13,"2") = "[2]"
+attr(ds$B201_13,"3") = "[3]"
+attr(ds$B201_13,"4") = "[4]"
+attr(ds$B201_13,"5") = "[5]"
+attr(ds$B201_13,"6") = "[6]"
+attr(ds$B201_14,"1") = "abstoßend [1]"
+attr(ds$B201_14,"7") = "anziehend [7]"
+attr(ds$B201_14,"2") = "[2]"
+attr(ds$B201_14,"3") = "[3]"
+attr(ds$B201_14,"4") = "[4]"
+attr(ds$B201_14,"5") = "[5]"
+attr(ds$B201_14,"6") = "[6]"
+attr(ds$B201_15,"1") = "herkömmlich [1]"
+attr(ds$B201_15,"7") = "neuartig [7]"
+attr(ds$B201_15,"2") = "[2]"
+attr(ds$B201_15,"3") = "[3]"
+attr(ds$B201_15,"4") = "[4]"
+attr(ds$B201_15,"5") = "[5]"
+attr(ds$B201_15,"6") = "[6]"
+attr(ds$B201_16,"1") = "unangenehm [1]"
+attr(ds$B201_16,"7") = "angenehm [7]"
+attr(ds$B201_16,"2") = "[2]"
+attr(ds$B201_16,"3") = "[3]"
+attr(ds$B201_16,"4") = "[4]"
+attr(ds$B201_16,"5") = "[5]"
+attr(ds$B201_16,"6") = "[6]"
+attr(ds$B201_17,"1") = "sicher [1]"
+attr(ds$B201_17,"7") = "unsicher [7]"
+attr(ds$B201_17,"2") = "[2]"
+attr(ds$B201_17,"3") = "[3]"
+attr(ds$B201_17,"4") = "[4]"
+attr(ds$B201_17,"5") = "[5]"
+attr(ds$B201_17,"6") = "[6]"
+attr(ds$B201_18,"1") = "aktivierend [1]"
+attr(ds$B201_18,"7") = "einschläfernd [7]"
+attr(ds$B201_18,"2") = "[2]"
+attr(ds$B201_18,"3") = "[3]"
+attr(ds$B201_18,"4") = "[4]"
+attr(ds$B201_18,"5") = "[5]"
+attr(ds$B201_18,"6") = "[6]"
+attr(ds$B201_19,"1") = "erwartungskonform [1]"
+attr(ds$B201_19,"7") = "nicht erwartungskonform [7]"
+attr(ds$B201_19,"2") = "[2]"
+attr(ds$B201_19,"3") = "[3]"
+attr(ds$B201_19,"4") = "[4]"
+attr(ds$B201_19,"5") = "[5]"
+attr(ds$B201_19,"6") = "[6]"
+attr(ds$B201_20,"1") = "ineffizient [1]"
+attr(ds$B201_20,"7") = "effizient [7]"
+attr(ds$B201_20,"2") = "[2]"
+attr(ds$B201_20,"3") = "[3]"
+attr(ds$B201_20,"4") = "[4]"
+attr(ds$B201_20,"5") = "[5]"
+attr(ds$B201_20,"6") = "[6]"
+attr(ds$B201_21,"1") = "übersichtlich [1]"
+attr(ds$B201_21,"7") = "verwirrend [7]"
+attr(ds$B201_21,"2") = "[2]"
+attr(ds$B201_21,"3") = "[3]"
+attr(ds$B201_21,"4") = "[4]"
+attr(ds$B201_21,"5") = "[5]"
+attr(ds$B201_21,"6") = "[6]"
+attr(ds$B201_22,"1") = "unpragmatisch [1]"
+attr(ds$B201_22,"7") = "pragmatisch [7]"
+attr(ds$B201_22,"2") = "[2]"
+attr(ds$B201_22,"3") = "[3]"
+attr(ds$B201_22,"4") = "[4]"
+attr(ds$B201_22,"5") = "[5]"
+attr(ds$B201_22,"6") = "[6]"
+attr(ds$B201_23,"1") = "aufgeräumt [1]"
+attr(ds$B201_23,"7") = "überladen [7]"
+attr(ds$B201_23,"2") = "[2]"
+attr(ds$B201_23,"3") = "[3]"
+attr(ds$B201_23,"4") = "[4]"
+attr(ds$B201_23,"5") = "[5]"
+attr(ds$B201_23,"6") = "[6]"
+attr(ds$B201_24,"1") = "attrakitv [1]"
+attr(ds$B201_24,"7") = "unattrakitv [7]"
+attr(ds$B201_24,"2") = "[2]"
+attr(ds$B201_24,"3") = "[3]"
+attr(ds$B201_24,"4") = "[4]"
+attr(ds$B201_24,"5") = "[5]"
+attr(ds$B201_24,"6") = "[6]"
+attr(ds$B201_25,"1") = "sympathisch [1]"
+attr(ds$B201_25,"7") = "unsympathisch [7]"
+attr(ds$B201_25,"2") = "[2]"
+attr(ds$B201_25,"3") = "[3]"
+attr(ds$B201_25,"4") = "[4]"
+attr(ds$B201_25,"5") = "[5]"
+attr(ds$B201_25,"6") = "[6]"
+attr(ds$B201_26,"1") = "konservativ [1]"
+attr(ds$B201_26,"7") = "innovativ [7]"
+attr(ds$B201_26,"2") = "[2]"
+attr(ds$B201_26,"3") = "[3]"
+attr(ds$B201_26,"4") = "[4]"
+attr(ds$B201_26,"5") = "[5]"
+attr(ds$B201_26,"6") = "[6]"
+attr(ds$FINISHED,"F") = "abgebrochen"
+attr(ds$FINISHED,"T") = "ausgefüllt"
+attr(ds$Q_VIEWER,"F") = "Teilnehmer"
+attr(ds$Q_VIEWER,"T") = "Durchklicker"
+comment(ds$SERIAL) = "Seriennummer (sofern verwendet)"
+comment(ds$REF) = "Referenz (sofern im Link angegeben)"
+comment(ds$QUESTNNR) = "Fragebogen, der im Interview verwendet wurde"
+comment(ds$MODE) = "Interview-Modus"
+comment(ds$STARTED) = "Zeitpunkt zu dem das Interview begonnen hat (Europe/Berlin)"
+comment(ds$A102_01) = "Alter: Jahre"
+comment(ds$A101) = "Geschlecht"
+comment(ds$A103) = "Fahrrad Typ"
+comment(ds$B101_01) = "System Usability Scale (SUS): Ich denke, ich würde diesen Prototypen gerne häufiger benutzen. (umgepolt)"
+comment(ds$B101_02) = "System Usability Scale (SUS): Ich finde den Prototypen unnötig komplex. (umgepolt)"
+comment(ds$B101_03) = "System Usability Scale (SUS): Ich finde, der Prototyp ist einfach zu benutzen. (umgepolt)"
+comment(ds$B101_04) = "System Usability Scale (SUS): Ich denke, ich würde die Unterstützung einer erfahreneren Person brauchen, um in der Lage zu sein, den Prototypen zu benutzen. (umgepolt)"
+comment(ds$B101_05) = "System Usability Scale (SUS): Ich finde, die verschiedenen Funktionen in diesem Prototypen sind gut integriert. (umgepolt)"
+comment(ds$B101_06) = "System Usability Scale (SUS): Ich denke, es gibt zu viele Inkonsistenzen in diesem Prototyp. (umgepolt)"
+comment(ds$B101_07) = "System Usability Scale (SUS): Ich könnte mir vorstellen, dass die meisten Leute sehr schnell lernen würden mit diesem Prototypen umzugehen. (umgepolt)"
+comment(ds$B101_08) = "System Usability Scale (SUS): Ich fand den Prototyp sehr schwerfällig im Gebrauch. (umgepolt)"
+comment(ds$B101_09) = "System Usability Scale (SUS): Ich fühlte mich sehr sicher bei der Benutzung des Prototypen. (umgepolt)"
+comment(ds$B101_10) = "System Usability Scale (SUS): Ich musste eine Menge lernen, bevor ich mit diesem Prototypen zurechtkam. (umgepolt)"
+comment(ds$B201_01) = "UEQ Skala: unerfreulich/erfreulich"
+comment(ds$B201_02) = "UEQ Skala: unverständlich/verständlich"
+comment(ds$B201_03) = "UEQ Skala: kreativ/phantasielos"
+comment(ds$B201_04) = "UEQ Skala: leicht zu lernen/schwer zu lernen"
+comment(ds$B201_05) = "UEQ Skala: wertvoll/minderfertig"
+comment(ds$B201_06) = "UEQ Skala: langweilig/spannend"
+comment(ds$B201_07) = "UEQ Skala: uninteresssant/interessant"
+comment(ds$B201_08) = "UEQ Skala: unberechenbar/voraussagbar"
+comment(ds$B201_09) = "UEQ Skala: schnell/langsam"
+comment(ds$B201_10) = "UEQ Skala: origniell/konventionell"
+comment(ds$B201_11) = "UEQ Skala: behindernd/unterstützend"
+comment(ds$B201_12) = "UEQ Skala: gut/schlecht"
+comment(ds$B201_13) = "UEQ Skala: kompliziert/einfach"
+comment(ds$B201_14) = "UEQ Skala: abstoßend/anziehend"
+comment(ds$B201_15) = "UEQ Skala: herkömmlich/neuartig"
+comment(ds$B201_16) = "UEQ Skala: unangenehm/angenehm"
+comment(ds$B201_17) = "UEQ Skala: sicher/unsicher"
+comment(ds$B201_18) = "UEQ Skala: aktivierend/einschläfernd"
+comment(ds$B201_19) = "UEQ Skala: erwartungskonform/nicht erwartungskonform"
+comment(ds$B201_20) = "UEQ Skala: ineffizient/effizient"
+comment(ds$B201_21) = "UEQ Skala: übersichtlich/verwirrend"
+comment(ds$B201_22) = "UEQ Skala: unpragmatisch/pragmatisch"
+comment(ds$B201_23) = "UEQ Skala: aufgeräumt/überladen"
+comment(ds$B201_24) = "UEQ Skala: attrakitv/unattrakitv"
+comment(ds$B201_25) = "UEQ Skala: sympathisch/unsympathisch"
+comment(ds$B201_26) = "UEQ Skala: konservativ/innovativ"
+comment(ds$TIME001) = "Verweildauer Seite 1"
+comment(ds$TIME002) = "Verweildauer Seite 2"
+comment(ds$TIME003) = "Verweildauer Seite 3"
+comment(ds$TIME_SUM) = "Verweildauer gesamt (ohne Ausreißer)"
+comment(ds$MAILSENT) = "Versandzeitpunkt der Einladungsmail (nur für nicht-anonyme Adressaten)"
+comment(ds$LASTDATA) = "Zeitpunkt als der Datensatz das letzte mal geändert wurde"
+comment(ds$FINISHED) = "Wurde die Befragung abgeschlossen (letzte Seite erreicht)?"
+comment(ds$Q_VIEWER) = "Hat der Teilnehmer den Fragebogen nur angesehen, ohne die Pflichtfragen zu beantworten?"
+comment(ds$LASTPAGE) = "Seite, die der Teilnehmer zuletzt bearbeitet hat"
+comment(ds$MAXPAGE) = "Letzte Seite, die im Fragebogen bearbeitet wurde"
+
+
+
+# Assure that the comments are retained in subsets
+as.data.frame.avector = as.data.frame.vector
+`[.avector` <- function(x,i,...) {
+  r <- NextMethod("[")
+  mostattributes(r) <- attributes(x)
+  r
+}
+ds_tmp = data.frame(
+  lapply(ds, function(x) {
+    structure( x, class = c("avector", class(x) ) )
+  } )
+)
+mostattributes(ds_tmp) = attributes(ds)
+ds = ds_tmp
+rm(ds_tmp)
+
